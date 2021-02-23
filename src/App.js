@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import Map from './components/Map';
-import Key from './components/Key';
+import Legend from './components/Legend';
  
 
 const App = () => {
    return(
         <div className='html'>
             <Map/>
-            <Key/> 
+            <Legend/> 
         </div>
     );   
 };
