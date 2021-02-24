@@ -56,18 +56,18 @@
   .census-info {
   align-items: right;
   top: 120px;
-  right: 35px;
+  right: 38px;
   padding: 10px 10px;
   width: 30%;
-  height: 20%;
+  height: 15%;
   font-size:8px;
  
 }
 .census-info-hover{
   z-index: 999;
   top: 120px;
-  right: 35px;
-  height: 20%;
+  right: 38px;
+  height: 15%;
   width:30%;
   padding: 10px 10px;
   border-radius: 5px;
