@@ -48,7 +48,7 @@
   position: absolute;
   letter-spacing:2px;
   margin-top:150px;
-  font: 11px;
+  font-size: 14px;
   box-shadow: 0 0 5px 0 rgba(255,255,255, 0.3);
   background: rgba(0,0,0,0.8);
 }
