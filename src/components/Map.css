@@ -80,6 +80,9 @@
   padding:none;
   
 }
+.heading h2{
+  font-size:20px;
+}
 .text-muted{
   padding:none;
 }
