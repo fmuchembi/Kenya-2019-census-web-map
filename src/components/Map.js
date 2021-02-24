@@ -76,7 +76,7 @@ const Map = ()=>{
     return(
          <div className='container'>
             <div className="header">
-            <h2 className='heading'>Kenya Population as Per 2019 National Census Excersice</h2>
+            <h2 className='heading'>Kenya Population as Per 2019 National Census Excercise</h2>
             <p className="text-muted">A choropleth map displaying Kenya population density as per the national census conducted <br/>in 2019
             Each County, details displayed by the map include, total population and number of each gender.</p></div>
             <div className="row no-gutters">
