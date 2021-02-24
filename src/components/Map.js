@@ -1,38 +1,66 @@
-import React from 'react';
-import { MapContainer, TileLayer, Marker, Popup, GeoJSON} from 'react-leaflet';
+import React,{useState} from 'react';
+import { MapContainer, TileLayer, Marker, Popup, GeoJSON,layer} from 'react-leaflet';
 import {features} from '../data/data.json';
+import Layer from 'leaflet';
+import './Map.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const Map = ()=>{
+    const [onselect, setOnselect] = useState({});
+
+    function highlightFeature(e) {
+        var layer = e.target;
+        const { County, Total, Male, Female, Intersex, Desnity } = e.target.feature.properties;
+        setOnselect({
+            county:County,
+            total:Total,
+            male:Male,
+            female:Female,
+            intersex:Intersex,
+            density: Desnity
+        });
+        layer.setStyle({
+            weight: 1,
+            color: "black",
+            fillOpacity: 1
+        });
+        if (!Layer.Browser.ie && !Layer.Browser.opera && !Layer.Browser.edge) {
+         layer.bringToFront();
+       }
+    }
+    function resetHighlight(e) {
+        setOnselect({});
+        e.target.setStyle(style(e.target.feature));
+    }
+
+    function onEachFeature(feature, layer) {
+        layer.on({
+            mouseover: highlightFeature,
+            mouseout: resetHighlight,
+        });
+    }
 
     const feature = features.map(feature=>{
         return(feature);
     });
 
-    let mapRef;
-    const COLOR_0 = "#feedde";
-    const COLOR_10 = "#fdd0a2";
-    const COLOR_200 = "#fdae6b";
-    const COLOR_400 = "#fd8d3c";
-    const COLOR_900 = "#e6550d";
-    const COLOR_3000 = "#a63603";
-
-
     function mapPolygonColorToDensity(density) {
-        return density > 3000
-            ? COLOR_3000
-            : density > 900
-            ? COLOR_900
-            : density > 400
-            ? COLOR_400
-            : density > 200
-            ? COLOR_200
-            : density > 10
-            ? COLOR_10
-            : COLOR_0;
+        return density > 3023
+            ? '#a50f15'
+            : density > 676
+            ? '#de2d26'
+            : density > 428
+            ? '#fb6a4a'
+            : density > 236
+            ? '#fc9272'
+            : density > 23
+            ? '#fcbba1'
+            : '#fee5d9';
     }
-    const style = (features => {
+    const style = (feature => {
         return ({
-            fillColor: mapPolygonColorToDensity(features.properties.Desnity),
+            fillColor: mapPolygonColorToDensity(feature.properties.Desnity),
             weight: 1,
             opacity: 1,
             color: 'white',
@@ -41,16 +69,34 @@ const Map = ()=>{
         });
     });
     const mapStyle = {
-        height: '90vh',
-        width: '100%',
+        height: '55vh',
+        width: '85%',
+        margin: '0 auto',
     }
-      
-    console.log(features[46].properties.Desnity)
     return(
-         <div className='html'>
-            <h2 className='heading'>KENYA POPULATION CENSUS</h2>
+         <div className='container'>
+            <div className="header">
+            <h2 className='heading'>Kenya Population as Per 2019 National Census Excersice</h2>
+            <p className="text-muted">A choropleth map displaying Kenya population density as per the national census conducted <br/>in 2019
+            Each County, details displayed by the map include, total population, and number of each gender.</p></div>
             <div className="row no-gutters">
                 <div className="col-sm-6 col-md-8">
+                {!onselect.county && (
+                <div className="census-info-hover">
+                    <strong>Kenya population density</strong>
+                    <p>Hover on each county for more details</p>
+                </div>
+                )}
+                {onselect.county && (
+                    <ul className="census-info">
+                        <strong>{onselect.county}</strong><br/>
+                        <li>Total Population:{onselect.total}</li>
+                        <li>Men:{onselect.male}</li>
+                        <li>Women:{onselect.female}</li>
+                        <li>Intersex:{onselect.intersex}</li>
+                        <span>Population density:{onselect.density} per square mile</span>
+                    </ul>
+                )}
                 <MapContainer center={[1.286389, 38.817223]}
                 zoom={6} scrollWheelZoom={true} style={mapStyle}>
                     <TileLayer
@@ -59,11 +105,9 @@ const Map = ()=>{
                     />
                    {feature && (
                     <GeoJSON data={feature} 
-                    style={style} />
+                    style={style} 
+                    onEachFeature={onEachFeature}/>
                     )}
-                    <Marker position={[1.2578, 37.5]}>
-                        <Popup>I am a green leaf</Popup>
-                    </Marker>
                 </MapContainer>
                 </div>
             </div>
