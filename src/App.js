@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './App.css';
 import Map from './components/Map';
 import Legend from './components/Legend';
