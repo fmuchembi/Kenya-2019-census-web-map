@@ -9,7 +9,7 @@ import './Map.css';
 const Map = ()=>{
     const [onselect, setOnselect] = useState({});
 
-    function highlightFeature(e) {
+    const highlightFeature = (e=> {
         var layer = e.target;
         const { County, Total, Male, Female, Intersex, Desnity } = e.target.feature.properties;
         setOnselect({
@@ -25,16 +25,13 @@ const Map = ()=>{
             color: "black",
             fillOpacity: 1
         });
-        if (!Layer.Browser.ie && !Layer.Browser.opera && !Layer.Browser.edge) {
-         layer.bringToFront();
-       }
-    }
-    function resetHighlight(e) {
+    });
+    const resetHighlight= (e =>{
         setOnselect({});
         e.target.setStyle(style(e.target.feature));
-    }
+    })
 
-    function onEachFeature(feature, layer) {
+    const onEachFeature= (feature, layer)=> {
         layer.on({
             mouseover: highlightFeature,
             mouseout: resetHighlight,
@@ -45,7 +42,7 @@ const Map = ()=>{
         return(feature);
     });
 
-    function mapPolygonColorToDensity(density) {
+    const mapPolygonColorToDensity=(density => {
         return density > 3023
             ? '#a50f15'
             : density > 676
@@ -57,7 +54,7 @@ const Map = ()=>{
             : density > 23
             ? '#fcbba1'
             : '#fee5d9';
-    }
+    })
     const style = (feature => {
         return ({
             fillColor: mapPolygonColorToDensity(feature.properties.Desnity),
