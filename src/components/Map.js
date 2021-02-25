@@ -76,8 +76,8 @@ const Map = ()=>{
             <h2 className='heading'>Kenya Population as Per 2019 National Census Exercise</h2>
             <p className="text-muted">A choropleth map displaying Kenya population density as per the national census conducted <br/>in 2019
             Each County, details displayed by the map include, total population and number of each gender.</p></div>
-            <div className="row no-gutters">
-                <div className="col-sm-6 col-md-8">
+            <div className="map">
+                <div className="hover">
                 {!onselect.county && (
                 <div className="census-info-hover">
                     <strong>Kenya population density</strong>
