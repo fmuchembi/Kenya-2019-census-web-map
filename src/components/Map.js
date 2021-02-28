@@ -1,7 +1,6 @@
 import React,{useState} from 'react';
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON,layer} from 'react-leaflet';
 import {features} from '../data/data.json';
-import Layer from 'leaflet';
 import './Map.css';
 //import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -62,7 +61,7 @@ const Map = ()=>{
             opacity: 1,
             color: 'white',
             dashArray: '2',
-            fillOpacity: 0.7
+            fillOpacity: 0.5
         });
     });
     const mapStyle = {
@@ -86,19 +85,19 @@ const Map = ()=>{
                 )}
                 {onselect.county && (
                     <ul className="census-info">
-                        <strong>{onselect.county}</strong><br/>
+                        <li><strong>{onselect.county}</strong></li><br/>
                         <li>Total Population:{onselect.total}</li>
                         <li>Men:{onselect.male}</li>
                         <li>Women:{onselect.female}</li>
                         <li>Intersex:{onselect.intersex}</li>
-                        <span>Population density:{onselect.density} per square mile</span>
+                        <li>Population density:{onselect.density} people <br/> per square km</li>
                     </ul>
                 )}
                 <MapContainer center={[1.286389, 38.817223]}
                 zoom={6} scrollWheelZoom={true} style={mapStyle}>
                     <TileLayer
                         attribution="Map tiles by Carto, under CC BY 3.0. Data by OpenStreetMap, under ODbL."
-                        url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
+                            url="http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"
                     />
                    {feature && (
                     <GeoJSON data={feature} 

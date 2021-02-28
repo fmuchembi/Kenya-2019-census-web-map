@@ -34,7 +34,7 @@
   font-size:12px;
   position: absolute;
   z-index: 999;
-  box-shadow: 0 0 5px 0 rgba(255,255,255, 0.3);
+  box-shadow: 0 0 5px 0 rgba(184, 140, 140, 0.3);
 }
 .census-info-hover{
   z-index: 999;
