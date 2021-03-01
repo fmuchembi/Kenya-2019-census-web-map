@@ -61,7 +61,7 @@ const Map = ()=>{
             opacity: 1,
             color: 'white',
             dashArray: '2',
-            fillOpacity: 0.5
+            fillOpacity: 0.7
         });
     });
     const mapStyle = {
